@@ -1,0 +1,27 @@
+
+<!-- saved from url=(0011)about:blank -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div style="font-family: system-ui, sans-serif, Arial; font-size: 14px; color: #333; padding: 20px;">
+  <div style="max-width: 600px; margin: auto; background-color: #fff; border-radius: 8px; overflow: hidden;">
+    <div style="text-align: center; background-color: #333; padding: 14px">
+      <img src="cid:logo.png" alt="MiniMart Logo" style="height: 40px;">
+    </div>
+    <div style="padding: 20px;">
+      <h1 style="font-size: 20px; margin-bottom: 20px;">🛒 Order Confirmation</h1>
+      <p>Thank you for shopping with <b>MiniMart</b>!</p>
+      <p>Here are your order details:</p>
+
+      <ul>
+        {{#each orders}}
+          <li>{{name}} × {{units}} = ₹{{price}}</li>
+        {{/each}}
+      </ul>
+
+      <p><b>Total: ₹{{cost.totalPrice}}</b></p>
+      <p style="margin-top: 20px;">We will notify you once your order is shipped.</p>
+    </div>
+    <div style="background: #f5f5f5; text-align: center; padding: 12px; font-size: 12px; color: #777;">
+      MiniMart © 2025 – All rights reserved
+    </div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,26 @@
+/* Page background */
+.perfume-page {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Cards */
+.perfume-card {
+  border-radius: 12px;
+  color: #000; /* Text color inside card */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.perfume-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Images */
+.perfume-img {
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}

@@ -1,0 +1,145 @@
+#root {
+  width: 100%;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  text-align: center;
+}
+
+
+.product-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Navbar button hover effect */
+.nav-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-btn:hover {
+  background-color: yellow !important;
+  color: black !important;
+  border-color: yellow !important;
+}
+
+
+/* Smooth hover for all nav buttons */
+.nav-btn {
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+}
+
+.nav-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+  opacity: 0.9;
+}
+
+/* Custom extracts (light gradients for looks) */
+.btn-warning { background: linear-gradient(45deg, #ffc107, #ffcd39); }
+.btn-primary { background: linear-gradient(45deg, #0d6efd, #3d8bfd); }
+.btn-success { background: linear-gradient(45deg, #198754, #28a745); }
+.btn-danger { background: linear-gradient(45deg, #dc3545, #e55353); }
+.btn-secondary { background: linear-gradient(45deg, #6c757d, #8d99a6); }
+.btn-info { background: linear-gradient(45deg, #0dcaf0, #31d2f2); }
+.btn-light { background: linear-gradient(45deg, #f8f9fa, #ffffff); }
+.btn-dark { background: linear-gradient(45deg, #212529, #343a40); }
+
+
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+body{
+background-color: rgb(237, 237, 240) !important ;
+}
+
+/* Navbar grid */
+.navbar-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, auto));
+  gap: 10px;
+}
+
+.nav-btn {
+  background: white;
+  border-radius: 8px;
+  padding: 6px 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-btn:hover {
+  background: #333;
+  color: white;
+  transform: scale(1.05);
+}
+
+.search-box-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-box {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 5px 10px;
+  width: 200px;
+}
