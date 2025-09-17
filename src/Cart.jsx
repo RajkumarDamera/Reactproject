@@ -14,6 +14,15 @@ import {
   caluculateButtonDiscount,
   applyCoupon,
 } from "./discountUtils";
+import {
+  FaPlus,
+  FaMinus,
+  FaTrash,
+  FaTicketAlt,
+  FaEnvelope,
+  FaHeart,
+  FaGift,
+} from "react-icons/fa";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -28,13 +37,13 @@ function Cart() {
   const [blast, setBlast] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [like, setLike] = useState(false);
 
-  // --- Price Calculations ---
   const totalPrice = caluculateTotal(cartItems);
   const discountAmount = caluculateButtonDiscount(totalPrice, discount);
   const finalPrice = totalPrice - discountAmount - couponDiscount;
 
-  // --- Coupon ---
+  // --- Apply Coupon ---
   const handleApplyCoupon = () => {
     const discountValue = applyCoupon(totalPrice, coupon);
     if (discountValue > 0) {
@@ -63,21 +72,20 @@ function Cart() {
       alert("Your cart is empty!");
       return;
     }
+    if (paymentMethod === "cod") {
+      alert("❌ Cash on Delivery not available for this order.");
+      return;
+    }
 
     const orderId = Date.now();
-
-    // EmailJS order summary
     const orderSummary = cartItems
       .map(
         (item) => `
-        <div style="margin-bottom:15px;">
-          <p><b>${item.name}</b></p>
-          <p>Price: ₹${item.price} × ${item.quantity} = <b>₹${(
-          item.price * item.quantity
-        ).toFixed(2)}</b></p>
-          <img src="${item.Imageurl}" alt="${item.name}" width="100" height="100" style="border-radius:8px;"/>
-        </div>
-        `
+      <div style="margin-bottom:15px;">
+        <p><b>${item.name}</b></p>
+        <p>Price: ₹${item.price} × ${item.quantity} = <b>₹${(item.price * item.quantity).toFixed(2)}</b></p>
+        <img src="${item.Imageurl}" alt="${item.name}" width="100" height="100" style="border-radius:8px;"/>
+      </div>`
       )
       .join("");
 
@@ -85,16 +93,19 @@ function Cart() {
       order_id: orderId,
       orders: orderSummary,
       total: finalPrice.toFixed(2),
-      shipping: 50,
       email: customerEmail,
+      shipping: 50,
     };
 
     emailjs
-      .send("service_x1g48bn", "template_106atqs", templateParams, "o9aP_X4BuLuYjQDfo")
+      .send(
+        "service_x1g48bn",
+        "template_106atqs",
+        templateParams,
+        "o9aP_X4BuLuYjQDfo"
+      )
       .then(() => {
         alert("✅ Order confirmed! Confirmation email has been sent.");
-
-        // Add order to Redux store
         dispatch(
           placeOrder({
             orderId,
@@ -105,7 +116,6 @@ function Cart() {
             date: new Date().toISOString(),
           })
         );
-
         dispatch(clearCart());
       })
       .catch((error) => {
@@ -118,19 +128,52 @@ function Cart() {
     <div
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #f9f9f9, #e8f0f7)",
+        background: "linear-gradient(135deg, #f0f4f8, #dff6fd)",
         padding: "40px",
         position: "relative",
         overflow: "hidden",
-        fontFamily: "Poppins, sans-serif",
+        fontFamily: "'Poppins', 'Roboto', sans-serif",
       }}
     >
-      <h1 style={{ textAlign: "center", marginBottom: "30px", color: "#2c3e50" }}>
+      {/* Title */}
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "30px",
+          color: "#2c3e50",
+          fontWeight: 800,
+          textShadow: "1px 1px 2px #ccc",
+        }}
+      >
         🛒 Your Shopping Cart
+        <FaHeart
+          style={{
+            marginLeft: "10px",
+            color: like ? "red" : "#e74c3c",
+            cursor: "pointer",
+            transition: "transform 0.3s",
+          }}
+          onClick={() => setLike(!like)}
+        />
+        <FaGift
+          style={{
+            marginLeft: "10px",
+            color: "#f39c12",
+            cursor: "pointer",
+            transform: like ? "rotate(20deg)" : "rotate(0deg)",
+            transition: "transform 0.5s",
+          }}
+        />
       </h1>
 
       {cartItems.length === 0 ? (
-        <p style={{ textAlign: "center", fontSize: "20px", color: "#7f8c8d" }}>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "20px",
+            color: "#7f8c8d",
+          }}
+        >
           Your cart is empty... Add some products!
         </p>
       ) : (
@@ -155,11 +198,16 @@ function Cart() {
                   borderRadius: "15px",
                   marginBottom: "20px",
                   padding: "15px",
-                  boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                  boxShadow: "0 6px 25px rgba(0,0,0,0.15)",
                   transition: "transform 0.2s ease-in-out",
+                  cursor: "pointer",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.04)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
               >
                 <img
                   src={item.Imageurl}
@@ -173,8 +221,10 @@ function Cart() {
                   }}
                 />
                 <div style={{ flex: 1 }}>
-                  <h3 style={{ margin: "0 0 8px", color: "#34495e" }}>{item.name}</h3>
-                  <p style={{ margin: 0, color: "#e67e22", fontWeight: "600" }}>
+                  <h3 style={{ margin: "0 0 8px", color: "#34495e", fontWeight: 600 }}>
+                    {item.name}
+                  </h3>
+                  <p style={{ margin: 0, color: "#e67e22", fontWeight: 600 }}>
                     ₹{item.price} × {item.quantity}
                   </p>
                 </div>
@@ -190,7 +240,7 @@ function Cart() {
                       cursor: "pointer",
                     }}
                   >
-                    -
+                    <FaMinus />
                   </button>
                   <button
                     onClick={() => dispatch(increaseQuantity(item.id))}
@@ -203,7 +253,7 @@ function Cart() {
                       cursor: "pointer",
                     }}
                   >
-                    +
+                    <FaPlus />
                   </button>
                   <button
                     onClick={() => dispatch(removeFromCart(item.id))}
@@ -217,7 +267,7 @@ function Cart() {
                       cursor: "pointer",
                     }}
                   >
-                    ❌
+                    <FaTrash />
                   </button>
                 </div>
               </div>
@@ -231,10 +281,12 @@ function Cart() {
                 backgroundColor: "white",
                 borderRadius: "15px",
                 padding: "25px",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+                boxShadow: "0 6px 30px rgba(0,0,0,0.15)",
               }}
             >
-              <h2 style={{ marginTop: 0, color: "#2c3e50" }}>Order Summary</h2>
+              <h2 style={{ marginTop: 0, color: "#2c3e50", fontWeight: 700 }}>
+                Order Summary
+              </h2>
               <p>Subtotal: <strong>₹{totalPrice.toFixed(2)}</strong></p>
               {discount > 0 && <p>Discount ({discount}%): -₹{discountAmount.toFixed(2)}</p>}
               {couponDiscount > 0 && <p>Coupon Discount: -₹{couponDiscount.toFixed(2)}</p>}
@@ -268,6 +320,7 @@ function Cart() {
                     border: "none",
                     padding: "10px 15px",
                     borderRadius: "8px",
+                    cursor: "pointer",
                   }}
                 >
                   Reset
@@ -300,7 +353,7 @@ function Cart() {
                     cursor: "pointer",
                   }}
                 >
-                  Apply
+                  <FaTicketAlt /> Apply
                 </button>
                 {couponMessage && (
                   <p
@@ -320,9 +373,9 @@ function Cart() {
                 )}
               </div>
 
-              {/* Email Input */}
+              {/* Email */}
               <div style={{ marginTop: "20px" }}>
-                <label>Enter your Email</label>
+                <label><FaEnvelope /> Enter your Email</label>
                 <input
                   type="email"
                   placeholder="example@gmail.com"
@@ -340,40 +393,33 @@ function Cart() {
               {/* Payment Method */}
               <div style={{ marginTop: "20px" }}>
                 <h3>Select Payment Method:</h3>
-                <button
-                  onClick={() => setPaymentMethod("qr")}
-                  style={{
-                    padding: "10px 15px",
-                    marginRight: "10px",
-                    borderRadius: "8px",
-                    border: paymentMethod === "qr" ? "2px solid #27ae60" : "1px solid #ccc",
-                  }}
-                >
-                  QR Code
-                </button>
-                <button
-                  onClick={() => setPaymentMethod("card")}
-                  style={{
-                    padding: "10px 15px",
-                    borderRadius: "8px",
-                    border: paymentMethod === "card" ? "2px solid #27ae60" : "1px solid #ccc",
-                  }}
-                >
-                  Card
-                </button>
+                {["qr", "card", "cod"].map((method) => (
+                  <button
+                    key={method}
+                    onClick={() => setPaymentMethod(method)}
+                    style={{
+                      padding: "10px 15px",
+                      marginRight: "10px",
+                      borderRadius: "8px",
+                      border: paymentMethod === method ? "2px solid #27ae60" : "1px solid #ccc",
+                      cursor: method === "cod" ? "not-allowed" : "pointer",
+                      backgroundColor: method === "cod" ? "#f8d7da" : "#fff",
+                    }}
+                  >
+                    {method.toUpperCase()}
+                  </button>
+                ))}
               </div>
 
+              {/* Payment Info */}
               {paymentMethod === "qr" && (
                 <div style={{ marginTop: "20px", textAlign: "center" }}>
                   <h4>Scan UPI QR to Pay ₹{finalPrice.toFixed(2)}</h4>
                   <QRCode
-                    value={`upi://pay?pa=6305627155-2@axl&pn=MiniMart&am=${finalPrice.toFixed(
-                      2
-                    )}&cu=INR`}
+                    value={`upi://pay?pa=6305627155-2@axl&pn=MiniMart&am=${finalPrice.toFixed(2)}&cu=INR`}
                   />
                 </div>
               )}
-
               {paymentMethod === "card" && (
                 <div style={{ marginTop: "20px", textAlign: "center" }}>
                   <h4>Enter Card Details</h4>
@@ -413,7 +459,7 @@ function Cart() {
         </div>
       )}
 
-      {/* Confetti Blast */}
+      {/* Confetti */}
       {showConfetti &&
         Array.from({ length: 100 }).map((_, i) => (
           <div
@@ -431,22 +477,23 @@ function Cart() {
           ></div>
         ))}
 
-      <style>
-        {`
-          @keyframes confetti-fall {
-            from { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-          }
-          .blast-effect {
-            animation: blast 0.6s ease-in-out;
-          }
-          @keyframes blast {
-            0% { transform: scale(0.7); opacity: 0.6; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-          }
-        `}
-      </style>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+        @keyframes confetti-fall {
+          from { transform: translateY(-100vh) rotate(0deg); opacity:1; }
+          to { transform: translateY(100vh) rotate(720deg); opacity:0; }
+        }
+
+        .blast-effect {
+          animation: blast 0.6s ease-in-out;
+        }
+        @keyframes blast {
+          0% { transform: scale(0.7); opacity:0.6; }
+          50% { transform: scale(1.2); opacity:1; }
+          100% { transform: scale(1); opacity:1; }
+        }
+      `}</style>
     </div>
   );
 }

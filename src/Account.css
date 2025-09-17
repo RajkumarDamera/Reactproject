@@ -1,223 +1,188 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 :root {
-    --primary-color: #4a5568;
-    --secondary-color: #2d3748;
-    --accent-color: #38a169;
-    --background-color: #f7fafc;
-    --white: #ffffff;
-    --text-color: #718096;
-    --error-color: #e53e3e;
-    --success-color: #38a169;
+  --primary-color: #4a5568;
+  --secondary-color: #2d3748;
+  --accent-color: #38a169;
+  --background-color: #f7fafc;
+  --white: #ffffff;
+  --text-color: #718096;
+  --highlight-color: #38a169;
 }
 
-.main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: var(--background-color);
-    font-family: 'Montserrat', sans-serif;
+.about-container {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--primary-color);
+  background: var(--background-color);
+  padding: 50px 20px;
 }
 
-.account-container {
-    position: relative;
-    width: 900px;
-    max-width: 95%;
-    min-height: 550px;
-    background: var(--white);
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 15px 15px rgba(0,0,0,0.25);
-    overflow: hidden;
+/* Hero Section */
+.about-hero {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.form-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
+.about-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent-color);
 }
 
-.sign-in-container, .sign-up-container {
-    width: 50%;
+.about-subtitle {
+  font-size: 18px;
+  color: var(--text-color);
 }
 
-.sign-up-container input, .sign-in-container input {
-    padding: 16px 20px 16px 50px;
-    font-size: 16px;
-    border-radius: 10px;
+.highlight {
+  font-weight: 700;
+  color: var(--highlight-color);
 }
 
-button {
-    border-radius: 25px;
-    border: 1px solid var(--accent-color);
-    background-color: var(--accent-color);
-    color: #FFFFFF;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 14px 60px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
+/* Story Section */
+.about-story {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 60px;
 }
 
-button.ghost {
-    background-color: transparent;
-    border-color: #FFFFFF;
-    font-size: 16px;
-    padding: 14px 60px;
+.story-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-h1 {
-    font-weight: bold;
-    margin: 0;
-    color: var(--secondary-color);
-    font-size: 32px;
+.story-content {
+  flex: 1;
+  min-width: 300px;
 }
 
-p {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px;
+.story-content h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: var(--accent-color);
 }
 
-.input-group .icon {
-    left: 20px;
-    font-size: 18px;
+.story-content p {
+  font-size: 16px;
+  margin-bottom: 25px;
+  color: var(--text-color);
 }
 
-.overlay-panel h1 {
-    font-size: 28px;
+.icon {
+  color: var(--highlight-color);
 }
 
-.overlay-panel p {
-    font-size: 16px;
+/* Cards Section */
+.about-why {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.logged-in-container {
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: var(--white);
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 15px 15px rgba(0,0,0,0.25);
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
-.logged-in-container h3 {
-    font-size: 28px;
-    color: var(--success-color);
-    margin-bottom: 20px;
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
-.logged-in-container button {
-    font-size: 16px;
-    padding: 14px 60px;
-    background-color: var(--error-color);
-    border-color: var(--error-color);
-    color: white;
-    cursor: pointer;
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
 }
 
-.message.error {
-    color: var(--error-color);
-    font-weight: bold;
-    margin-top: 10px;
+.card:hover {
+  transform: translateY(-10px);
 }
 
-.message.success {
-    color: var(--success-color);
-    font-weight: bold;
-    margin-top: 10px;
+.card-icon {
+  font-size: 36px;
+  color: var(--highlight-color);
+  margin-bottom: 10px;
 }
 
-/* Overlay container and animations */
-.account-container.right-panel-active .sign-in-container {
-    transform: translateX(100%);
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
-.sign-up-container {
-    left: 0;
-    width: 50%;
-    opacity: 0;
-    z-index: 1;
+.card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
-.account-container.right-panel-active .sign-up-container {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-    animation: show 0.6s;
+.card p {
+  font-size: 14px;
+  color: var(--text-color);
 }
 
-@keyframes show {
-    0%, 49.99% { opacity: 0; z-index: 1; }
-    50%, 100% { opacity: 1; z-index: 5; }
+/* Values Section */
+.about-values {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.overlay-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: transform 0.6s ease-in-out;
-    z-index: 100;
+.values-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 25px;
 }
 
-.account-container.right-panel-active .overlay-container {
-    transform: translateX(-100%);
+.value {
+  background: var(--white);
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
 }
 
-.overlay {
-    background: linear-gradient(to right, #48bb78, #38a169);
-    color: var(--white);
-    position: relative;
-    left: -100%;
-    height: 100%;
-    width: 200%;
-    transform: translateX(0);
-    transition: transform 0.6s ease-in-out;
+.value:hover {
+  transform: translateY(-5px);
 }
 
-.account-container.right-panel-active .overlay {
-    transform: translateX(50%);
+.value-icon {
+  color: var(--highlight-color);
+  font-size: 20px;
 }
 
-.overlay-panel {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 40px;
-    text-align: center;
-    top: 0;
-    height: 100%;
-    width: 50%;
-    transform: translateX(0);
-    transition: transform 0.6s ease-in-out;
+/* Closing Section */
+.about-closing {
+  text-align: center;
+  margin-top: 50px;
 }
 
-.overlay-left {
-    transform: translateX(-20%);
+.about-closing h2 {
+  font-size: 28px;
+  color: var(--accent-color);
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
-.account-container.right-panel-active .overlay-left {
-    transform: translateX(0);
-}
-
-.overlay-right {
-    right: 0;
-    transform: translateX(0);
-}
-
-.account-container.right-panel-active .overlay-right {
-    transform: translateX(20%);
+.about-closing p {
+  font-size: 16px;
+  color: var(--text-color);
 }

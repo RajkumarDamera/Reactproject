@@ -1,6 +1,278 @@
 import React, { useState, useRef } from "react";
 import { FaUser, FaLock, FaEnvelope, FaSignInAlt, FaUserPlus, FaSignOutAlt } from "react-icons/fa";
-import "./Account.css";
+
+// The CSS is now included directly in the component via a <style> tag.
+// This makes the component self-contained.
+const GlobalStyles = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    :root {
+      --primary-color: #6B4DE6;
+      --secondary-color: #48329E;
+      --white-color: #FFFFFF;
+      --light-gray-color: #F6F5F7;
+      --dark-gray-color: #333;
+      --error-color: #e74c3c;
+      --success-color: #2ecc71;
+      --border-radius: 10px;
+      --box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--light-gray-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: -20px 0 50px;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .logged-in-container {
+        background-color: var(--white-color);
+        padding: 40px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .logged-in-container h3 {
+        color: var(--dark-gray-color);
+        margin-bottom: 20px;
+    }
+
+    .account-container {
+      background-color: var(--white-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      position: relative;
+      overflow: hidden;
+      width: 768px;
+      max-width: 100%;
+      min-height: 480px;
+    }
+
+    .form-container {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      transition: all 0.6s ease-in-out;
+    }
+    
+    .form-container form {
+      background-color: var(--white-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 50px;
+      height: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: bold;
+      margin: 0;
+      color: var(--dark-gray-color);
+    }
+    
+    p {
+      font-size: 14px;
+      font-weight: 100;
+      line-height: 20px;
+      letter-spacing: 0.5px;
+      margin: 20px 0 30px;
+    }
+
+    .input-group {
+      position: relative;
+      margin: 8px 0;
+      width: 100%;
+    }
+
+    .input-group input {
+      background-color: #eee;
+      border: none;
+      padding: 12px 15px 12px 40px;
+      margin: 8px 0;
+      width: 100%;
+      border-radius: 8px;
+    }
+    
+    .input-group .icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    button {
+      border-radius: 20px;
+      border: 1px solid var(--primary-color);
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: var(--white-color);
+      font-size: 12px;
+      font-weight: bold;
+      padding: 12px 45px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 80ms ease-in;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    button.ghost {
+      background-color: transparent;
+      border-color: var(--white-color);
+      background: none;
+    }
+    
+    .message {
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .message.success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .sign-in-container {
+      left: 0;
+      width: 50%;
+      z-index: 2;
+    }
+
+    .sign-up-container {
+      left: 0;
+      width: 50%;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .overlay-container {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      transition: transform 0.6s ease-in-out;
+      z-index: 100;
+    }
+
+    .overlay {
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color)) no-repeat 0 0 / cover;
+      color: var(--white-color);
+      position: relative;
+      left: -100%;
+      height: 100%;
+      width: 200%;
+      transform: translateX(0);
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-panel {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 40px;
+      text-align: center;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      transform: translateX(0);
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-left {
+      transform: translateX(-20%);
+    }
+
+    .overlay-right {
+      right: 0;
+      transform: translateX(0);
+    }
+    
+    /* Animation */
+    .account-container.right-panel-active .sign-in-container {
+      transform: translateX(100%);
+    }
+
+    .account-container.right-panel-active .sign-up-container {
+      transform: translateX(100%);
+      opacity: 1;
+      z-index: 5;
+      animation: show 0.6s;
+    }
+    
+    @keyframes show {
+      0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+      }
+      50%, 100% {
+        opacity: 1;
+        z-index: 5;
+      }
+    }
+
+    .account-container.right-panel-active .overlay-container {
+      transform: translateX(-100%);
+    }
+    
+    .account-container.right-panel-active .overlay {
+      transform: translateX(50%);
+    }
+    
+    .account-container.right-panel-active .overlay-left {
+      transform: translateX(0);
+    }
+
+    .account-container.right-panel-active .overlay-right {
+      transform: translateX(20%);
+    }
+
+  `}</style>
+);
+
 
 function Account() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -48,7 +320,7 @@ function Account() {
     const password = passwordRef.current.value.trim();
     const confirm = confirmRef.current.value.trim();
 
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !confirm) {
       setErrors("⚠️ All fields are required");
       clearMessages();
       return;
@@ -67,7 +339,11 @@ function Account() {
     const newUser = { username, email, password };
     setUsers([...users, newUser]);
     setSuccess("🎉 Signup successful! You can now log in.");
-    setIsRightPanelActive(false);
+    setErrors("");
+    // After successful signup, switch to the login panel
+    setTimeout(() => {
+        setIsRightPanelActive(false);
+    }, 1000);
     clearMessages();
   };
 
@@ -78,6 +354,7 @@ function Account() {
   if (currentUser) {
     return (
       <div className="main-container">
+        <GlobalStyles />
         <div className="logged-in-container">
           <h3>Welcome, {currentUser.username}! 🎉</h3>
           <button onClick={handleLogout}>
@@ -90,6 +367,7 @@ function Account() {
 
   return (
     <div className="main-container">
+      <GlobalStyles />
       <div className={`account-container ${isRightPanelActive ? 'right-panel-active' : ''}`}>
 
         {/* Sign Up Form */}

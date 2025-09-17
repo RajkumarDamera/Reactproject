@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaUser, FaEnvelope, FaCommentDots, FaPaperPlane, FaCheckCircle } from "react-icons/fa";
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -27,15 +28,15 @@ function ContactUs() {
     <div
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #f9f9f9, #e8f0f7)",
-        padding: "40px",
+        background: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
+        padding: "50px 20px",
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
       <h1
         style={{
           textAlign: "center",
-          marginBottom: "30px",
+          marginBottom: "40px",
           color: "#2c3e50",
           fontWeight: "bold",
           fontSize: "36px",
@@ -49,62 +50,87 @@ function ContactUs() {
           maxWidth: "700px",
           margin: "0 auto",
           backgroundColor: "#fff",
-          padding: "30px",
-          borderRadius: "12px",
-          boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+          padding: "40px",
+          borderRadius: "16px",
+          boxShadow: "0 12px 30px rgba(0,0,0,0.15)",
         }}
       >
         {!submitted ? (
           <form onSubmit={handleSubmit}>
             {/* Name */}
-            <div style={{ marginBottom: "20px" }}>
-              <label style={{ display: "block", marginBottom: "8px", color: "#34495e" }}>
-                Full Name
-              </label>
+            <div style={{ marginBottom: "25px", position: "relative" }}>
+              <FaUser
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "12px",
+                  transform: "translateY(-50%)",
+                  color: "#2980b9",
+                }}
+              />
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Enter your name"
+                placeholder="Full Name"
                 required
                 style={{
                   width: "100%",
-                  padding: "12px",
+                  padding: "14px 14px 14px 40px",
                   border: "1px solid #bdc3c7",
-                  borderRadius: "6px",
+                  borderRadius: "8px",
                   fontSize: "16px",
+                  outline: "none",
+                  transition: "0.3s",
                 }}
+                onFocus={(e) => (e.target.style.borderColor = "#2980b9")}
+                onBlur={(e) => (e.target.style.borderColor = "#bdc3c7")}
               />
             </div>
 
             {/* Email */}
-            <div style={{ marginBottom: "20px" }}>
-              <label style={{ display: "block", marginBottom: "8px", color: "#34495e" }}>
-                Email Address
-              </label>
+            <div style={{ marginBottom: "25px", position: "relative" }}>
+              <FaEnvelope
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "12px",
+                  transform: "translateY(-50%)",
+                  color: "#2980b9",
+                }}
+              />
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email"
+                placeholder="Email Address"
                 required
                 style={{
                   width: "100%",
-                  padding: "12px",
+                  padding: "14px 14px 14px 40px",
                   border: "1px solid #bdc3c7",
-                  borderRadius: "6px",
+                  borderRadius: "8px",
                   fontSize: "16px",
+                  outline: "none",
+                  transition: "0.3s",
                 }}
+                onFocus={(e) => (e.target.style.borderColor = "#2980b9")}
+                onBlur={(e) => (e.target.style.borderColor = "#bdc3c7")}
               />
             </div>
 
             {/* Message */}
-            <div style={{ marginBottom: "20px" }}>
-              <label style={{ display: "block", marginBottom: "8px", color: "#34495e" }}>
-                Message
-              </label>
+            <div style={{ marginBottom: "25px", position: "relative" }}>
+              <FaCommentDots
+                style={{
+                  position: "absolute",
+                  top: "20px",
+                  left: "12px",
+                  color: "#2980b9",
+                }}
+              />
               <textarea
                 name="message"
                 value={formData.message}
@@ -114,12 +140,16 @@ function ContactUs() {
                 rows="5"
                 style={{
                   width: "100%",
-                  padding: "12px",
+                  padding: "14px 14px 14px 40px",
                   border: "1px solid #bdc3c7",
-                  borderRadius: "6px",
+                  borderRadius: "8px",
                   fontSize: "16px",
                   resize: "none",
+                  outline: "none",
+                  transition: "0.3s",
                 }}
+                onFocus={(e) => (e.target.style.borderColor = "#2980b9")}
+                onBlur={(e) => (e.target.style.borderColor = "#bdc3c7")}
               ></textarea>
             </div>
 
@@ -127,7 +157,7 @@ function ContactUs() {
             <button
               type="submit"
               style={{
-                padding: "12px 25px",
+                padding: "14px 25px",
                 backgroundColor: "#2980b9",
                 color: "white",
                 fontSize: "16px",
@@ -135,16 +165,21 @@ function ContactUs() {
                 border: "none",
                 borderRadius: "8px",
                 cursor: "pointer",
-                transition: "0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                transition: "0.3s",
               }}
-              onMouseOver={(e) => (e.target.style.backgroundColor = "#1c5980")}
-              onMouseOut={(e) => (e.target.style.backgroundColor = "#2980b9")}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#1c5980")}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#2980b9")}
             >
+              <FaPaperPlane />
               Send Message
             </button>
           </form>
         ) : (
           <div style={{ textAlign: "center", color: "#27ae60" }}>
+            <FaCheckCircle style={{ fontSize: "60px", marginBottom: "20px" }} />
             <h2>✅ Thank you for contacting us!</h2>
             <p>We will get back to you shortly.</p>
           </div>
