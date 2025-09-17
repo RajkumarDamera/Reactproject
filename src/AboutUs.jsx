@@ -2,7 +2,7 @@ import React from "react";
 import { 
   FaLeaf, FaTruck, FaSmile, FaSeedling, FaHandsHelping, FaStar 
 } from "react-icons/fa";
-// import "./AboutUs.css";
+import "./AboutUs.css";
 
 function AboutUs() {
   return (

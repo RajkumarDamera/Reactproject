@@ -1,0 +1,164 @@
+ .about-container {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Hero Section */
+.about-hero {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f7f7f7;
+}
+
+.about-title {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.about-subtitle {
+  font-size: 1.2rem;
+}
+
+.highlight {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+/* Our Story Section */
+.about-story {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 50px 0;
+  align-items: center;
+}
+
+.story-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+}
+
+.story-content {
+  flex: 1;
+}
+
+.story-content h2 {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.story-content .icon {
+  margin-right: 10px;
+  color: #27ae60;
+}
+
+/* Why Choose Section */
+.about-why {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 15px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  font-size: 2rem;
+  color: #27ae60;
+  margin-bottom: 10px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  margin: 10px 0;
+}
+
+/* Values Section */
+.about-values {
+  margin: 50px 0;
+  text-align: center;
+}
+
+.values-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.value {
+  background-color: #e8f5e9;
+  padding: 15px 25px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.value-icon {
+  color: #27ae60;
+}
+
+/* Closing Section */
+.about-closing {
+  text-align: center;
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  border-radius: 10px;
+}
+
+.about-closing h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-story {
+    flex-direction: column;
+  }
+  
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .values-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

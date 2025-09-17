@@ -4,7 +4,7 @@ import { addToCart, addToWishlist } from "./store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GiPerfumeBottle } from "react-icons/gi"; // React icon for perfumes
-import "./Perfumes.css";
+import "./perfumes.css";
 
 function Perfumes() {
   const dispatch = useDispatch();
