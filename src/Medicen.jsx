@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToWishlist } from "./store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Medicen.css";
+import "./medicen.css";
 
 function Medicen() {
   const dispatch = useDispatch();
