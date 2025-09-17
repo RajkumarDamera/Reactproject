@@ -18,7 +18,7 @@ function AboutUs() {
       {/* Our Story */}
       <section className="about-story">
         <div className="story-image">
-          <img src="images/picks/minimart.jpg" alt="Mini Mart Store" />
+          <img src="imaes/picks/minimartbanner.jpg" alt="Mini Mart Store" />
         </div>
         <div className="story-content">
           <h2><FaLeaf className="icon"/> Our Story</h2>
@@ -38,21 +38,21 @@ function AboutUs() {
         <div className="cards">
           <div className="card">
             <FaSeedling className="card-icon"/>
-            <img src="images/picks/fressh.jpg" alt="Fresh" />
+            <img src="imaes/picks/fressh.jpg" alt="Fresh" />
             <h3>Fresh & Quality</h3>
             <p>We deliver the freshest fruits, vegetables, dairy, and groceries for your family.</p>
           </div>
 
           <div className="card">
             <FaTruck className="card-icon"/>
-            <img src="images/picks/fastdelivery.jpg" alt="Fast Delivery" />
+            <img src="imaes/picks/fastdelivery.jpg" alt="Fast Delivery" />
             <h3>Fast Delivery</h3>
             <p>Quick and reliable doorstep delivery at your convenience.</p>
           </div>
 
           <div className="card">
             <FaSmile className="card-icon"/>
-            <img src="images/picks/coustmer.jpg" alt="Customer First" />
+            <img src="imaes/picks/coustmer.jpg" alt="Customer First" />
             <h3>Customer First</h3>
             <p>We prioritize customer satisfaction with affordable pricing and excellent service.</p>
           </div>
