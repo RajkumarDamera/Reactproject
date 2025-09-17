@@ -4,7 +4,7 @@ import { addToCart, addToWishlist } from "./store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GiHamburger } from "react-icons/gi"; // React icon for Fastfood
-import "./Fastfood.css";
+import "./fastfood.css";
 
 function Fastfood() {
   const dispatch = useDispatch();
