@@ -232,7 +232,7 @@ function App() {
             }}
           />
 
-          {/* Right Side (Logout outside toggle) */}
+          {/* Right Side */}
           <div className="d-flex gap-2 align-items-center">
             <NavLink to="/Account">
               <FaUser /> {loggedInUser}
@@ -244,7 +244,7 @@ function App() {
               <FaSignOutAlt className="me-1" /> Logout
             </button>
 
-            {/* Toggle Button (mobile) */}
+            {/* ✅ Toggle Button (only mobile) */}
             <button
               className="btn btn-light d-md-none"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -254,45 +254,37 @@ function App() {
           </div>
         </div>
 
-        {/* ✅ Mobile Collapsible Menu (only links inside) */}
+        {/* ✅ Desktop Navbar Links (always visible on laptop/desktop) */}
+        <div className="d-none d-md-flex gap-3 mt-2 flex-wrap">
+          <NavLink to="/Home"><FaHome /> Home</NavLink>
+          <NavLink to="/Veg"><FaAppleAlt /> Veg</NavLink>
+          <NavLink to="/Nonveg"><FaDrumstickBite /> Nonveg</NavLink>
+          <NavLink to="/Milk"><FaGlassWhiskey /> Milk</NavLink>
+          <NavLink to="/Fastfood"><FaHamburger /> Fastfood</NavLink>
+          <NavLink to="/Perfumes"><FaGift /> Perfumes</NavLink>
+          <NavLink to="/Medicen"><FaPills /> Medicen</NavLink>
+          <NavLink to="/AboutUs"><FaInfoCircle /> About Us</NavLink>
+          <NavLink to="/Contact"><FaPhone /> Contact</NavLink>
+          <NavLink to="/Orders"><FaBoxOpen /> Orders</NavLink>
+          <NavLink to="/Wishlist"><FaHeart /> Wishlist</NavLink>
+          <NavLink to="/Cart"><FaShoppingCart /> Cart ({CartCount})</NavLink>
+        </div>
+
+        {/* ✅ Mobile Collapsible Menu (toggle) */}
         {menuOpen && (
           <div className="d-flex flex-column mt-2 d-md-none gap-2">
-            <NavLink to="/Home" onClick={handleCloseMenu}>
-              <FaHome /> Home
-            </NavLink>
-            <NavLink to="/Veg" onClick={handleCloseMenu}>
-              <FaAppleAlt /> Veg
-            </NavLink>
-            <NavLink to="/Nonveg" onClick={handleCloseMenu}>
-              <FaDrumstickBite /> Nonveg
-            </NavLink>
-            <NavLink to="/Milk" onClick={handleCloseMenu}>
-              <FaGlassWhiskey /> Milk
-            </NavLink>
-            <NavLink to="/Fastfood" onClick={handleCloseMenu}>
-              <FaHamburger /> Fastfood
-            </NavLink>
-            <NavLink to="/Perfumes" onClick={handleCloseMenu}>
-              <FaGift /> Perfumes
-            </NavLink>
-            <NavLink to="/Medicen" onClick={handleCloseMenu}>
-              <FaPills /> Medicen
-            </NavLink>
-            <NavLink to="/AboutUs" onClick={handleCloseMenu}>
-              <FaInfoCircle /> About Us
-            </NavLink>
-            <NavLink to="/Contact" onClick={handleCloseMenu}>
-              <FaPhone /> Contact
-            </NavLink>
-            <NavLink to="/Orders" onClick={handleCloseMenu}>
-              <FaBoxOpen /> Orders
-            </NavLink>
-            <NavLink to="/Wishlist" onClick={handleCloseMenu}>
-              <FaHeart /> Wishlist
-            </NavLink>
-            <NavLink to="/Cart" onClick={handleCloseMenu}>
-              <FaShoppingCart /> Cart ({CartCount})
-            </NavLink>
+            <NavLink to="/Home" onClick={handleCloseMenu}><FaHome /> Home</NavLink>
+            <NavLink to="/Veg" onClick={handleCloseMenu}><FaAppleAlt /> Veg</NavLink>
+            <NavLink to="/Nonveg" onClick={handleCloseMenu}><FaDrumstickBite /> Nonveg</NavLink>
+            <NavLink to="/Milk" onClick={handleCloseMenu}><FaGlassWhiskey /> Milk</NavLink>
+            <NavLink to="/Fastfood" onClick={handleCloseMenu}><FaHamburger /> Fastfood</NavLink>
+            <NavLink to="/Perfumes" onClick={handleCloseMenu}><FaGift /> Perfumes</NavLink>
+            <NavLink to="/Medicen" onClick={handleCloseMenu}><FaPills /> Medicen</NavLink>
+            <NavLink to="/AboutUs" onClick={handleCloseMenu}><FaInfoCircle /> About Us</NavLink>
+            <NavLink to="/Contact" onClick={handleCloseMenu}><FaPhone /> Contact</NavLink>
+            <NavLink to="/Orders" onClick={handleCloseMenu}><FaBoxOpen /> Orders</NavLink>
+            <NavLink to="/Wishlist" onClick={handleCloseMenu}><FaHeart /> Wishlist</NavLink>
+            <NavLink to="/Cart" onClick={handleCloseMenu}><FaShoppingCart /> Cart ({CartCount})</NavLink>
           </div>
         )}
       </nav>
