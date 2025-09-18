@@ -26,6 +26,7 @@ import {
   FaSignOutAlt,
   FaLock,
   FaUserPlus,
+  FaBars,
 } from "react-icons/fa";
 
 import Home from "./Home";
@@ -45,12 +46,13 @@ import "./App.css";
 import Account from "./Account";
 
 // ✅ Active Link Helper
-const NavLink = ({ to, children }) => {
+const NavLink = ({ to, children, onClick }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
   return (
     <Link
       to={to}
+      onClick={onClick}
       className="text-decoration-none px-2 py-1 rounded"
       style={{
         color: isActive ? "#ffd700" : "#fff",
@@ -62,21 +64,12 @@ const NavLink = ({ to, children }) => {
         gap: "4px",
       }}
     >
-      <span
-        style={{
-          fontSize: "16px",
-          display: "flex",
-          alignItems: "center",
-          gap: "4px",
-        }}
-      >
-        {children}
-      </span>
+      {children}
     </Link>
   );
 };
 
-// ✅ Auth Page (Login + Signup with attractive design)
+// ✅ Auth Page (Login + Signup)
 function AuthPage({ onLogin }) {
   const [isSignup, setIsSignup] = useState(false);
   const [username, setUsername] = useState("");
@@ -190,9 +183,13 @@ function App() {
   const [search, setSearch] = useState("");
   const [loggedInUser, setLoggedInUser] = useState(null);
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   if (!loggedInUser) {
     return <AuthPage onLogin={setLoggedInUser} />;
   }
+
+  const handleCloseMenu = () => setMenuOpen(false);
 
   return (
     <BrowserRouter>
@@ -206,102 +203,98 @@ function App() {
           zIndex: 1000,
           display: "flex",
           flexDirection: "column",
-          gap: "5px",
         }}
       >
-        {/* Top Row */}
-        <div
-          className="d-flex w-100 align-items-center justify-content-between"
-          style={{ gap: "10px", flexWrap: "wrap" }}
-        >
+        <div className="d-flex w-100 align-items-center justify-content-between">
           {/* Logo */}
           <Link
             to="/Home"
             className="navbar-brand fw-bold d-flex align-items-center"
-            style={{
-              color: "#fff",
-              fontSize: "22px",
-              textShadow: "1px 1px 5px rgba(0,0,0,0.3)",
-            }}
+            style={{ color: "#fff", fontSize: "22px" }}
           >
             <FaShoppingCart className="me-2" /> MiniMart
           </Link>
 
-          {/* Search Bar */}
+          {/* Search Bar (always visible) */}
           <input
             type="text"
             placeholder="Search Products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="form-control"
+            className="form-control mx-2"
             style={{
               borderRadius: "25px",
               padding: "6px 12px",
               border: "2px solid transparent",
-              flex: "1 1 200px",
-              maxWidth: "350px",
+              maxWidth: "300px",
               backgroundColor: "rgba(255,255,255,0.2)",
               color: "#fff",
             }}
           />
 
-          {/* Wishlist, Cart, Account, Logout */}
-          <div className="d-flex gap-2 flex-wrap align-items-center">
-            <NavLink to="/Wishlist">
-              <FaHeart /> Wishlist
-            </NavLink>
-            <NavLink to="/Cart">
-              <FaShoppingCart /> Cart ({CartCount})
-            </NavLink>
+          {/* Right Side (Logout outside toggle) */}
+          <div className="d-flex gap-2 align-items-center">
             <NavLink to="/Account">
               <FaUser /> {loggedInUser}
             </NavLink>
             <button
               className="btn btn-sm btn-danger d-flex align-items-center"
-              style={{ borderRadius: "8px" }}
               onClick={() => setLoggedInUser(null)}
             >
               <FaSignOutAlt className="me-1" /> Logout
             </button>
+
+            {/* Toggle Button (mobile) */}
+            <button
+              className="btn btn-light d-md-none"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <FaBars />
+            </button>
           </div>
         </div>
 
-        {/* Bottom Row: Categories */}
-        <div
-          className="d-flex flex-wrap gap-2"
-          style={{ alignItems: "center", marginTop: "5px" }}
-        >
-          <NavLink to="/Home">
-            <FaHome /> Home
-          </NavLink>
-          <NavLink to="/Veg">
-            <FaAppleAlt /> Veg
-          </NavLink>
-          <NavLink to="/Nonveg">
-            <FaDrumstickBite /> Nonveg
-          </NavLink>
-          <NavLink to="/Milk">
-            <FaGlassWhiskey /> Milk
-          </NavLink>
-          <NavLink to="/Fastfood">
-            <FaHamburger /> Fastfood
-          </NavLink>
-          <NavLink to="/Perfumes">
-            <FaGift /> Perfumes
-          </NavLink>
-          <NavLink to="/Medicen">
-            <FaPills /> Medicen
-          </NavLink>
-          <NavLink to="/AboutUs">
-            <FaInfoCircle /> About Us
-          </NavLink>
-          <NavLink to="/Contact">
-            <FaPhone /> Contact
-          </NavLink>
-          <NavLink to="/Orders">
-            <FaBoxOpen /> Orders
-          </NavLink>
-        </div>
+        {/* ✅ Mobile Collapsible Menu (only links inside) */}
+        {menuOpen && (
+          <div className="d-flex flex-column mt-2 d-md-none gap-2">
+            <NavLink to="/Home" onClick={handleCloseMenu}>
+              <FaHome /> Home
+            </NavLink>
+            <NavLink to="/Veg" onClick={handleCloseMenu}>
+              <FaAppleAlt /> Veg
+            </NavLink>
+            <NavLink to="/Nonveg" onClick={handleCloseMenu}>
+              <FaDrumstickBite /> Nonveg
+            </NavLink>
+            <NavLink to="/Milk" onClick={handleCloseMenu}>
+              <FaGlassWhiskey /> Milk
+            </NavLink>
+            <NavLink to="/Fastfood" onClick={handleCloseMenu}>
+              <FaHamburger /> Fastfood
+            </NavLink>
+            <NavLink to="/Perfumes" onClick={handleCloseMenu}>
+              <FaGift /> Perfumes
+            </NavLink>
+            <NavLink to="/Medicen" onClick={handleCloseMenu}>
+              <FaPills /> Medicen
+            </NavLink>
+            <NavLink to="/AboutUs" onClick={handleCloseMenu}>
+              <FaInfoCircle /> About Us
+            </NavLink>
+            <NavLink to="/Contact" onClick={handleCloseMenu}>
+              <FaPhone /> Contact
+            </NavLink>
+            <NavLink to="/Orders" onClick={handleCloseMenu}>
+              <FaBoxOpen /> Orders
+            </NavLink>
+            <NavLink to="/Wishlist" onClick={handleCloseMenu}>
+              <FaHeart /> Wishlist
+            </NavLink>
+            <NavLink to="/Cart" onClick={handleCloseMenu}>
+              <FaShoppingCart /> Cart ({CartCount})
+            </NavLink>
+          </div>
+        )}
       </nav>
 
       {/* Page Content */}
